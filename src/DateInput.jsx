@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 
@@ -443,14 +444,21 @@ export default class DateInput extends PureComponent {
   }
 
   renderCustomInputs() {
-    const { placeholder } = this;
-    const elementFunctions = {
-      day: this.renderDay,
-      month: this.renderMonth,
-      year: this.renderYear,
-    };
+    if (this.state.value !== null) {
+        return (<div style={{
+            paddingTop: `2px`,
+            paddingLeft: `2px`
+        }}>{moment(this.state.value).format(`D MMM YYYY`)}</div>);
+    } else {
+      const { placeholder } = this;
+      const elementFunctions = {
+        day: this.renderDay,
+        month: this.renderMonth,
+        year: this.renderYear,
+      };
 
-    return renderCustomInputs(placeholder, elementFunctions);
+      return renderCustomInputs(placeholder, elementFunctions);
+    }
   }
 
   renderNativeInput() {
