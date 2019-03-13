@@ -7,6 +7,14 @@ import Fit from 'react-fit';
 
 import Calendar from 'react-calendar/dist/entry.nostyle';
 
+import {
+    getBegin,
+    getDay,
+    getEnd,
+    getMonth,
+    getYear,
+  } from './shared/dates';
+
 import DateInput from './DateInput';
 
 const baseClassName = 'react-date-picker';
@@ -156,6 +164,40 @@ export default class DatePicker extends PureComponent {
     );
   }
 
+  getTileDisabled({activeStartDate, date, view }) {
+    if (view === 'month' && this.props.allotments) {
+      let yearIndex = getYear(date);
+      let monthIndex = getMonth(date);
+      let dayIndex = getDay(date);
+
+      return !(this.props.allotments[yearIndex] && this.props.allotments[yearIndex][monthIndex] && this.props.allotments[yearIndex][monthIndex][dayIndex]);
+    } else {
+      return false;
+    }
+  }
+
+  getTileContent({ date, view }) {
+    let yearIndex = getYear(date);
+    let monthIndex = getMonth(date);
+    let dayIndex = getDay(date);
+
+    if (view === 'month' && this.props.allotments) {
+      let content = null;
+      if (this.props.allotments[yearIndex] && this.props.allotments[yearIndex][monthIndex] && this.props.allotments[yearIndex][monthIndex][dayIndex]) {
+        let dayData = this.props.allotments[yearIndex][monthIndex][dayIndex];
+        if (dayData.available < dayData.total) {
+          content = (<p style={{ color: `lightseagreen`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
+        } else {
+          content = (<p style={{ color: `red`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
+        }
+      }
+
+      return content;
+    } else {
+      return null;
+    }
+  }
+
   renderCalendar() {
     const { isOpen } = this.state;
 
@@ -180,6 +222,8 @@ export default class DatePicker extends PureComponent {
             className={calendarClassName}
             onChange={this.onChange}
             value={value || null}
+            tileDisabled={this.getTileDisabled.bind(this)}
+            tileContent={this.getTileContent.bind(this)}
             {...calendarProps}
           />
         </div>
@@ -260,6 +304,7 @@ DatePicker.propTypes = {
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
+  allotments: PropTypes.any
 };
 
 polyfill(DatePicker);
