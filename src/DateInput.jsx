@@ -448,7 +448,7 @@ export default class DateInput extends PureComponent {
         return (<div style={{
             paddingTop: `2px`,
             paddingLeft: `2px`
-        }}>{moment(this.state.value).format(`D MMM YYYY`)}</div>);
+        }}>{moment(this.state.value).format((this.props.dataFormat ? this.props.dataFormat : `D MMM YYYY`))}</div>);
     } else {
       const { placeholder } = this;
       const elementFunctions = {
@@ -521,6 +521,7 @@ DateInput.propTypes = {
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
+  dataFormat: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date),

@@ -112,6 +112,7 @@ export default class DatePicker extends PureComponent {
       minDate,
       name,
       returnValue,
+      dataFormat,
       required,
       showLeadingZeros,
       value,
@@ -133,6 +134,7 @@ export default class DatePicker extends PureComponent {
           name={name}
           onChange={this.onChange}
           returnValue={returnValue}
+          dataFormat={dataFormat}
           required={required}
           showLeadingZeros={showLeadingZeros}
           value={valueFrom}
@@ -302,6 +304,7 @@ DatePicker.propTypes = {
   isOpen: PropTypes.bool,
   name: PropTypes.string,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
+  dataFormat: PropTypes.string,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
   allotments: PropTypes.any
