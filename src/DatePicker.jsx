@@ -190,7 +190,7 @@ export default class DatePicker extends PureComponent {
         if (dayData.available < dayData.total) {
           content = (<p style={{ color: `lightseagreen`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
         } else {
-          content = (<p style={{ color: `red`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
+          content = (<p style={{ color: `blue`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
         }
       }
 

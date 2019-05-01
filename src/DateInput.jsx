@@ -444,7 +444,7 @@ export default class DateInput extends PureComponent {
   }
 
   renderCustomInputs() {
-    if (this.state.value !== null) {
+    if (this.state.value !== null && this.state.value !== undefined) {
         return (<div style={{
             paddingTop: `2px`,
             paddingLeft: `2px`
