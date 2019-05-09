@@ -188,9 +188,9 @@ export default class DatePicker extends PureComponent {
       if (this.props.allotments[yearIndex] && this.props.allotments[yearIndex][monthIndex] && this.props.allotments[yearIndex][monthIndex][dayIndex]) {
         let dayData = this.props.allotments[yearIndex][monthIndex][dayIndex];
         if (dayData.available < dayData.total) {
-          content = (<p style={{ color: `lightseagreen`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
+          content = (<p className="custom-tile-content custom-tile-content-lightseagreen">{dayData.text}</p>);
         } else {
-          content = (<p style={{ color: `blue`, fontSize: `10px`, margin: 0 }}>{dayData.text}</p>);
+          content = (<p className="custom-tile-content custom-tile-content-blue">{dayData.text}</p>);
         }
       }
 
